@@ -8,10 +8,13 @@
 </head>
 <body>
 
-  <div class="navbar">
+  <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a href="#" Treebook></a>
+        <a href="#" class="brand" Treebook></a>
+        <ul class= "nav">
+          <li><%= link_to "All Statuses", statuses_path%></li>
+        </ul>
       </div>
     </div>
   </div>
