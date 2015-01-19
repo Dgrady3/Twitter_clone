@@ -6,5 +6,13 @@
   <div class="staus">
     <strong><%= status.name%></strong>
     <p><%status.content%></p>
+      <div class="meta">
+        <%= link_to "Show", status
+        %>
+        <span class = "admin">
+          <%= link_to "Edit", edit_status_path(status)%>
+        </span>
+      </div>
+    </div>
   </div>
 <%end%>
