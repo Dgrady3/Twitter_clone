@@ -1,17 +1,27 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %></div>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+<div class= "row" >
+  <div class = "span4">
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "well"}) do |f| %>
 
-  <div><%= f.submit "Log in" %></div>
-<% end %>
+      <fieldset>
+        <legend>Sign In</legend>
 
-<%= render "devise/shared/links" %>
+      <%= f.input :email %>
+      <%= f.input :password %>
+
+      <% if devise_mapping.rememberable? -%>
+        <div><%= f.check_box :remember_me, as: :boolean %>
+      <% end -%>
+        <div><%= f.button :submit, "Sign in" %></div>
+        </fieldset>
+      <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+
+    <div class="span8">
+      <h2>Signing in is easy and secure</h2>
+    </div>
+</div>
