@@ -13,7 +13,8 @@ class StatusesControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
-    assert_response :success
+    assert_response :redirect
+    assert_redirect_to new_user_sessions_path
   end
 
   test "should create status" do

@@ -3,9 +3,11 @@
 one:
 
   content: MyText
+  user: joe
   user_id: 1234
 
 two:
 
   content: MyText
+  user: joe
   user_id: 1234

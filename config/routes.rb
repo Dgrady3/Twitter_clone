@@ -3,12 +3,12 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get 'register', to: 'devise/registrations#new', as: :register
-    get 'login', to: 'devise/session#new', as: :login
-    get 'logout', to: 'devise/session#destroy', as: :logout
+    get 'login', to: 'devise/sessions#new', as: :login
+    get 'logout', to: 'devise/sessions#destroy', as: :logout
   end
 
   resources :statuses
-  get 'feed', to: 'status#index' as: :feed
+  get 'feed', to: 'status#index', as: :feed
   root to: 'statuses#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
