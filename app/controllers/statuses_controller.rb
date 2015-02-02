@@ -25,7 +25,7 @@ class StatusesController < ApplicationController
   # POST /statuses
   # POST /statuses.json
   def create
-    @status = Status.new(status_params)
+    @status = current_user.statuses.new(status_params)
 
     respond_to do |format|
       if @status.save
