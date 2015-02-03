@@ -7,8 +7,6 @@ class User < ActiveRecord::Base
   has_many :user_friendships
   has_many :friends, through: :user_friendships
 
-
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
