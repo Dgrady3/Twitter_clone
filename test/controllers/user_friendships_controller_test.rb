@@ -25,22 +25,22 @@ class UserFriendshipsControllerTest < ActionController::TestCase
       end
 
       should "display the friend's name" do
-        get :new, friend_id: users(:Joe).id
+        get :new, friend_id: users(:Joe)
         assert_match /#{(:Joe).full_name}/, repsonse.body
       end
 
       should "assign a new user frienship" do
-        get :new, friend_id: users(:Joe).id
+        get :new, friend_id: users(:Joe)
         assert assigns(:user_friendship)
       end
 
       should "assign a new user friendship to the correct friend" do
-        get :new, friend_id: users(:Joe).id
+        get :new, friend_id: users(:Joe)
         assert_equal users(:Joe), assigns(:user_friendship).friend
       end
 
        should "assign a new user friendship to the currently logged in user" do
-        get :new, friend_id: users(:Joe).id
+        get :new, friend_id: users(:Joe)
         assert_equal users(:mike), assigns(:user_friendship).user
       end
 

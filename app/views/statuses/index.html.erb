@@ -4,7 +4,6 @@
 
 <%= link_to 'Post a New Status', new_status_path, class: "btn btn-success" %>
 <% @statuses.each do |status| %>
-<!-- <%= binding.pry%> -->
   <div class="text_center">
     <div class="status">
         <strong><%= link_to status.user.full_name, profile_path(status.user)%></strong>
