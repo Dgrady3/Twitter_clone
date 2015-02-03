@@ -35,6 +35,10 @@ gem 'arel', '6.0.0.beta2'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+group :test do
+  gem 'shoulda'
+end
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
