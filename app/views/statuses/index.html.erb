@@ -4,9 +4,10 @@
 
 <%= link_to 'Post a New Status', new_status_path, class: "btn btn-success" %>
 <% @statuses.each do |status| %>
+<!-- <%= binding.pry%> -->
   <div class="text_center">
     <div class="status">
-      <strong><%= status.try(:user).try(:full_name) %></strong>
+        <strong><%= link_to status.user.full_name, profile_path(status.user)%></strong>
       <p><%= status.content%></p>
         <div class="meta">
           <%= link_to time_ago_in_words(status.created_at) + " ago" , status %>
