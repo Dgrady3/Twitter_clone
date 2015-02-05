@@ -55,4 +55,14 @@ class UserFriendshipsControllerTest < ActionController::TestCase
       end
     end
   end
+
+  context "#create" do
+    context "when not logged in" do
+      should "redirect to the login page" do
+        get :new
+        assert_response :redirect
+        assert_redirected_to login_path
+      end
+    end
+  end
 end
