@@ -17,6 +17,7 @@ gem 'devise'
 gem 'responders', '~> 2.0'
 gem 'simple_form'
 gem 'pry'
+gem 'state_machine'
 
 # Use jQuery as the JavaScript library
 gem 'jquery-rails', '~> 4.0.0.beta2'
