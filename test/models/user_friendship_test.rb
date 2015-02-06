@@ -66,5 +66,11 @@ class UserFriendshipTest < ActiveSupport::TestCase
         UserFriendship.request(user(:Joe), user(:mike))
       end
     end
+
+    should "send a friend request email " do
+      assert_difference 'ActionMailer::Base.deliveries.size', 1 do
+        UserFriendship.request(user(:Joe), user(:mike))
+      end
+    end
   end
 end
