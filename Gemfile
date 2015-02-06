@@ -38,6 +38,7 @@ gem 'arel', '6.0.0.beta2'
 
 group :test do
   gem 'shoulda'
+  gem 'factory_girl_rails'
 end
 
 # Use Capistrano for deployment
