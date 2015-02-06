@@ -19,3 +19,7 @@
         <% end %>
         <% if friendship.accepted? %>
           <em>Friendship started <%= friendship.updated_at %>.</em><%= link_to "Update friendship", edit_user_friendship_path(friendship) %>.
+        <% end %>
+    </div>
+  </div>
+<% end %>
