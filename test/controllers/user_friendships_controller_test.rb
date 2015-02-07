@@ -101,7 +101,7 @@ class UserFriendshipsControllerTest < ActionController::TestCase
         end
 
         should "create a friendship " do
-          assert users(:Joe).friends.includes?(users(:mike))
+          assert users(:Joe).pending_friends.includes?(users(:mike))
         end
 
         should "redirect to profile page of friend" do
@@ -113,6 +113,15 @@ class UserFriendshipsControllerTest < ActionController::TestCase
           assert flash[:success]
           assert_equal "You are now friends with #{users(:mike).full_name}", flash[:success]
         end
+      end
+    end
+  end
+
+  context "#accept" do
+    context "when not logged in" do
+      should "redirect to the login page" do
+        put :accept, id: 1
+         assert_response :redirect
       end
     end
   end
