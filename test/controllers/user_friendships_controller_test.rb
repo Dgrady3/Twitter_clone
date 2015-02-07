@@ -116,4 +116,13 @@ class UserFriendshipsControllerTest < ActionController::TestCase
       end
     end
   end
+
+  context "#accept" do
+    context "when not logged in" do
+      should "redirect to the login page" do
+        put :accept, id: 1
+         assert_response :redirect
+      end
+    end
+  end
 end
