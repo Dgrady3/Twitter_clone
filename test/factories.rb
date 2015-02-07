@@ -11,7 +11,7 @@ FactoryGirl.define do
 
   factory :user_friendship do
     asociation :user, factory: :user
-    association :friend, facotry: :user
+    association :friend, factory: :user
 
     factory :pending_user_friendship do
       state 'pending'

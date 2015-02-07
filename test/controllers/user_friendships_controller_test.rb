@@ -29,6 +29,19 @@ class UserFriendshipsControllerTest < ActionController::TestCase
       should "display friend's name" do
         assert_match /Pending/, response.body
         assert_match /Active/, response.body
+      end
+
+      should "display pending information on a pending friendship" do
+        assert_select "#user_friendship#{@friendship1.id}" do
+          assert_select "em", "Friendship is pending"
+        end
+      end
+
+      should "display date information on an accepted friend" do
+        assert_select "#user_friendship_#{@friendship2.id}" do
+          assert_select "em", "Friendship started #{@friendship2.updated_at}."
+        end
+      end
     end
   end
 
