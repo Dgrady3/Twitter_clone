@@ -27,9 +27,6 @@ class UserFriendshipsController < ApplicationController
     render file: 'public/404', status: :not_found
   end
 
-
-
-
   def create
     if params[:user_friendship] && params[:user_friendship].has_key?(:friend_id)
       @friend = User.where(profile_name: params[:user_friendship][:friend_id]).first
@@ -54,7 +51,6 @@ class UserFriendshipsController < ApplicationController
       redirect_to root_path
     end
   end
-
 
   def edit
     @user_friendship = current_user.user_friendships.find(params[:id])
