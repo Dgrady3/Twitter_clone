@@ -38,4 +38,8 @@ class UserFriendship < ActiveRecord::Base
   def accept_mutual_friendship!
     mutual_friendship.update_attribute(:state, 'accepted')
   end
+
+  def delete_mutual_friendship!
+    mutual_friendship.delete
+  end
 end
