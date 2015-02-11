@@ -19,6 +19,7 @@ gem 'simple_form'
 gem 'pry'
 gem 'state_machine'
 gem 'draper'
+gem 'js-routes'
 
 # Use jQuery as the JavaScript library
 gem 'jquery-rails', '~> 4.0.0.beta2'
