@@ -3,7 +3,7 @@ class UserFriendship < ActiveRecord::Base
   belongs_to :friend, class_name: 'User', foreign_key: 'friend_id'
 
   state_machine :state, initial: :pending do
-    after_transition on: :accept, do: [:send_acceptance_email]
+    after_transition on: :accept, do: [:send_acceptance_email, :accept_mutual_friendship!]
 
     state :requested
 
@@ -31,8 +31,11 @@ class UserFriendship < ActiveRecord::Base
     UserNotifier.friend_request_accepted(id).deliver
   end
 
-  def accept_mutual_friendship!
+  def mutual_friendship
     mutual_friendship = self.class.where({user_id: friend_id, friend_id: user_id}).first
+  end
+
+  def accept_mutual_friendship!
     mutual_friendship.update_attribute(:state, 'accepted')
   end
 end
