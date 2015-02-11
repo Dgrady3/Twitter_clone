@@ -30,4 +30,9 @@ class UserFriendship < ActiveRecord::Base
   def send_acceptance_email
     UserNotifier.friend_request_accepted(id).deliver
   end
+
+  def accept_mutual_friendship!
+    mutual_friendship = self.class.where({user_id: friend_id, friend_id: user_id}).first
+    mutual_friendship.update_attribute(:state, 'accepted')
+  end
 end
