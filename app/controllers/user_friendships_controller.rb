@@ -54,8 +54,8 @@ class UserFriendshipsController < ApplicationController
   end
 
   def edit
-     @friend = User.find(params[:id])
-     @user_friendship = current_user.user_friendships.find_by(friend_id: @friend.id).decorate
+     @friend.User.where(profile_name: params[:id]).first
+     @user_friendship = current_user.user_friendships.where(friend_id: @friend.id).first.decorate
    end
 
   def destroy
