@@ -21,6 +21,8 @@ class UserFriendship < ActiveRecord::Base
     end
   end
 
+  validate :not_blocked
+
   def self.request(user1, user2)
     transaction do
       friendship1 = create(user: user1, friend: user2, state: 'pending')
@@ -28,6 +30,13 @@ class UserFriendship < ActiveRecord::Base
 
       friendship1.send_request_email if !friendship1.new_record?
       friendship1
+    end
+  end
+
+  def not_blocked
+    if UserFriendship.exists?(user_id: user_id, friend_id: friend_id, state: 'blocked') ||
+       UserFriendship.exists?(user_id: user_id, friend_id: user_id, state: 'blocked')
+      errors.add(:base, "The friendship cannot be added.")
     end
   end
 
