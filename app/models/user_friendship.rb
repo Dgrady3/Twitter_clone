@@ -8,9 +8,14 @@ class UserFriendship < ActiveRecord::Base
     after_transition on: :accept, do: [:send_acceptance_email, :accept_mutual_friendship!]
 
     state :requested
+    state :blocked
 
     event :accept do
       transition any => :accepted
+    end
+
+    event :blocked do
+      transition any => :blocked
     end
   end
 
