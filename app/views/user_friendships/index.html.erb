@@ -15,10 +15,10 @@
         <% end %>
         <% if friendship.requested? %>
           <em>Friendship requested.</em> <%= link_to "Accept Friendship",
-            edit_user_friendship_path(friendship) %>.
+            edit_user_friendship_path(friendship.friend.profile_name) %>.
         <% end %>
         <% if friendship.accepted? %>
-          <em>Friendship started <%= friendship.updated_at %>.</em><%= link_to "Update friendship", edit_user_friendship_path(friendship) %>.
+          <em>Friendship started <%= friendship.updated_at %>.</em><%= link_to "Update friendship", edit_user_friendship_path(friendship.friend.profile_name) %>.
         <% end %>
     </div>
   </div>

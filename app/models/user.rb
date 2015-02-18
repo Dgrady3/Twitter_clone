@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
                                       conditions: { state: 'pending' } }
 
   has_many :pending_friends, -> where { :pending_user_friendships }, source: :friend
+  has_many :requested_user_friendships, -> { where class_name: 'UserFriendship',
+                                      foreign_key: :user_id,
+                                      conditions: { state: 'requested' } }
+
+  has_many :requested_friends, -> where { :pending_user_friendships }, source: :friend
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

@@ -4,6 +4,7 @@ class UserFriendshipsController < ApplicationController
 
   def index
     @user_friendships = current_user.user_friendships.all
+    respond_with @user_friendships
   end
 
   def accept
@@ -14,6 +15,16 @@ class UserFriendshipsController < ApplicationController
       flash[:error] = "That friendship can not be accepted"
       redirect_to user_friendships_path
     end
+  end
+
+  def block
+    @user_friendship = current_user.user_friendships.find(params[:id])
+      if @user_friendship.block
+        flash[:success] = "You have blocked #{@user_friendship.friend.first_name}."
+    else
+      flash[:error] = "That friendship could not be blocked"
+    end
+      redirect_to user_friendships_path
   end
 
   def new
@@ -55,7 +66,7 @@ class UserFriendshipsController < ApplicationController
 
   def edit
      @friend = User.find(params[:id])
-     @user_friendship = current_user.user_friendships.find_by(friend_id: @friend.id).decorate
+     @user_friendship = current_user.user_friendships.where(friend_id: @friend.id).first.decorate
    end
 
   def destroy

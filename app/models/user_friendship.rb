@@ -6,13 +6,22 @@ class UserFriendship < ActiveRecord::Base
 
   state_machine :state, initial: :pending do
     after_transition on: :accept, do: [:send_acceptance_email, :accept_mutual_friendship!]
+    after_transition on: :blocked, do: [:block_mutual_friendship!]
+
 
     state :requested
+    state :blocked
 
     event :accept do
       transition any => :accepted
     end
+
+    event :blocked do
+      transition any => :blocked
+    end
   end
+
+  validate :not_blocked
 
   def self.request(user1, user2)
     transaction do
@@ -21,6 +30,13 @@ class UserFriendship < ActiveRecord::Base
 
       friendship1.send_request_email if !friendship1.new_record?
       friendship1
+    end
+  end
+
+  def not_blocked
+    if UserFriendship.exists?(user_id: user_id, friend_id: friend_id, state: 'blocked') ||
+       UserFriendship.exists?(user_id: user_id, friend_id: user_id, state: 'blocked')
+      errors.add(:base, "The friendship cannot be added.")
     end
   end
 
@@ -42,5 +58,9 @@ class UserFriendship < ActiveRecord::Base
 
   def delete_mutual_friendship!
     mutual_friendship.delete
+  end
+
+  def block_mutual_friendship!
+    mutual_friendship.update_attribute(:state, 'blocked') if mutual_friendship
   end
 end
