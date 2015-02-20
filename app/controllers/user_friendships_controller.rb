@@ -65,8 +65,8 @@ class UserFriendshipsController < ApplicationController
   end
 
   def edit
-     @friend = User.find(params[:id])
-     @user_friendship = current_user.user_friendships.where(friend_id: @friend.id).first.decorate
+    @friend = User.where(profile_name: params[:id]).first
+    @user_friendship = current_user.user_friendships.where(friend_id: @friend.id).first
    end
 
   def destroy
@@ -74,6 +74,23 @@ class UserFriendshipsController < ApplicationController
     if @user_friendship.destroy
       flash[:success] = "Friendship has been destroyed"
       redirect_to user_friendships_path
+    end
+  end
+
+  private
+
+  def friendship_association
+    case params[:list]
+    when nil
+      current_user.user_friendships
+    when 'blocked'
+      current_user.blocked_user_friendships
+    when 'pending'
+      current_user.pending_user_friendships
+    when 'accepted'
+      current_user.accepted_user_friendships
+    when 'requested'
+      current_user.requested_user_friendships
     end
   end
 end

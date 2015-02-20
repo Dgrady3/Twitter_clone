@@ -6,6 +6,7 @@
 <% @statuses.each do |status| %>
   <div class="text_center">
     <div class="status">
+    <%binding.pry%>
         <strong><%= link_to status.user.full_name, profile_path(status.user)%></strong>
       <p><%= status.content%></p>
         <div class="meta">
