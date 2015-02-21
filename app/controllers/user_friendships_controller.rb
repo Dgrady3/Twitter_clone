@@ -3,12 +3,7 @@ class UserFriendshipsController < ApplicationController
   respond_to :html, :json
 
   def index
-    case paras[:list]
-    when nil
-      @user_friendships = current_user.user_friendships.all
-    when 'blocked'
-      @user_friendships = current_user.blocked_user_friendships.all
-    end
+    @user_friendships = friendship_association.all
     respond_with @user_friendships
   end
 
