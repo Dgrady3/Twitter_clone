@@ -192,7 +192,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
-  draper
+  draper (~> 1.0)
   jbuilder (~> 2.0)
   jquery-rails (~> 4.0.0.beta2)
   js-routes

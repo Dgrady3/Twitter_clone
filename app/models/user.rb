@@ -5,19 +5,28 @@ class User < ActiveRecord::Base
 
   has_many :statuses
   has_many :user_friendships
-  has_many :friends, -> { where(user_friendships: { state: 'accepted' }) },
-                          through: :user_friendships
+  has_many :friends, -> { where user_friendships: { state: 'accepted' } },
+                          source: :user_friendships
 
-  has_many :pending_user_friendships, -> { where class_name: 'UserFriendship',
+  has_many :pending_user_friendships, ->  { where class_name: 'UserFriendship',
                                       foreign_key: :user_id,
                                       conditions: { state: 'pending' } }
+  has_many :pending_friends, -> { where  :pending_user_friendships}, source: :friend
 
-  has_many :pending_friends, -> where { :pending_user_friendships }, source: :friend
   has_many :requested_user_friendships, -> { where class_name: 'UserFriendship',
                                       foreign_key: :user_id,
                                       conditions: { state: 'requested' } }
+  has_many :requested_friends, -> { where  :pending_user_friendships }, source: :friend
 
-  has_many :requested_friends, -> where { :pending_user_friendships }, source: :friend
+  has_many :blocked_user_friendships, -> { where class_name: 'UserFriendship',
+                                      foreign_key: :user_id,
+                                      conditions: { state: 'blocked' } }
+  has_many :blocked_friends, -> { where  :bloked_user_friendships }, source: :friend
+
+  has_many :accepted_user_friendships, -> {where class_name: 'UserFriendship',
+                                      foreign_key: :user_id,
+                                      conditions: { state: 'accepted' }}
+  has_many :accepted_friends, -> { where  :pending_user_friendships}, source: :friend
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

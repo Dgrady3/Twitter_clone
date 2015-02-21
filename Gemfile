@@ -18,7 +18,7 @@ gem 'responders', '~> 2.0'
 gem 'simple_form'
 gem 'pry'
 gem 'state_machine'
-gem 'draper'
+gem 'draper', '~> 1.0'
 gem 'js-routes'
 
 # Use jQuery as the JavaScript library
