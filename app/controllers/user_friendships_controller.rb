@@ -3,7 +3,7 @@ class UserFriendshipsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @user_friendships = friendship_association.all
+    @user_friendship = UserFriendshipDecorator.decorate_collection(friendship_association.all)
     respond_with @user_friendships
   end
 
