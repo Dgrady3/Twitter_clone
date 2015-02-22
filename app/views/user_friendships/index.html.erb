@@ -4,7 +4,6 @@
 
 <% @user_friendships.uniq.each do |friendship| %>
   <% friend = friendship.friend %>
-  <% binding.pry %>
   <div id =" <%= dom_id(friendship) %>" class = "friend row">
     <div class = "span1">
       <%= link_to friend.full_name, profile_path(friend) %>
