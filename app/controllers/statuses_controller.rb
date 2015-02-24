@@ -6,9 +6,6 @@ class StatusesController < ApplicationController
     @statuses = Status.all
   end
 
-  def show
-  end
-
   def new
     @status = Status.new
   end
