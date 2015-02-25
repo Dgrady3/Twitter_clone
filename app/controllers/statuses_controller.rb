@@ -2,28 +2,14 @@ class StatusesController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_status, only: [:show, :edit, :update, :destroy]
 
-  # GET /statuses
-  # GET /statuses.json
   def index
     @statuses = Status.all
   end
 
-  # GET /statuses/1
-  # GET /statuses/1.json
-  def show
-  end
-
-  # GET /statuses/new
   def new
     @status = Status.new
   end
 
-  # GET /statuses/1/edit
-  def edit
-  end
-
-  # POST /statuses
-  # POST /statuses.json
   def create
     @status = current_user.statuses.new(status_params)
 
@@ -38,8 +24,6 @@ class StatusesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /statuses/1
-  # PATCH/PUT /statuses/1.json
   def update
     @status = current_user.statuses.find(params[:id])
     if params[:status] && params[:status].has_key?(:user_id)
@@ -57,8 +41,6 @@ class StatusesController < ApplicationController
     end
   end
 
-  # DELETE /statuses/1
-  # DELETE /statuses/1.json
   def destroy
     @status.destroy
     respond_to do |format|
