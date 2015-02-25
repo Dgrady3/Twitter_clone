@@ -10,9 +10,6 @@ class StatusesController < ApplicationController
     @status = Status.new
   end
 
-  def edit
-  end
-
   def create
     @status = current_user.statuses.new(status_params)
 
